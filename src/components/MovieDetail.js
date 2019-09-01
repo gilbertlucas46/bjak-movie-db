@@ -36,6 +36,7 @@ export default class MovieDetail extends Component {
       if (!(spotlight)) {
         return background;
       }
+
       return spotlight;
     };
     return (
@@ -55,23 +56,42 @@ export default class MovieDetail extends Component {
 
 const MovieWrapper = styled.div`
   position: relative;
-  padding-top: 50vh;
   background: url(${(props) => props.backdrop}) no-repeat;
   background-size: contain;
+  @media (min-width:992px) {
+    padding-top: 50vh; 
+  }
+  @media (max-width:991px) {
+    padding-top: 20vh; 
+  }
 `;
 
 const MovieInfo = styled.div`
   background: white;
   text-align: left;
   padding: 2rem 10%;
-  @media (min-width: 992px) {
+  img {
+    &:hover {
+      transform: unset;
+    }
+  }
+  @media (min-width:992px) {
     display: flex; 
   }
   > div {
-    margin-left: 20px;
+    @media (min-width:992px) {
+      margin-left: 20px;
+    }
+    @media (max-width:991px) {
+      margin-left: 0; 
+      top: -5rem;
+    }
   }
   img {
     position: relative;
     top: -5rem;
+    @media (max-width:991px) {
+      margin: 0; 
+    }
   }
 `;

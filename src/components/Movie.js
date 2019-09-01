@@ -29,6 +29,10 @@ Movie.propTypes = {
 
 export const Poster = styled.img`
   box-shadow: 0 0 30px #00000080;
+  transition: all .2s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const Cards = styled.div`
