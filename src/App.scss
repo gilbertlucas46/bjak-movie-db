@@ -1,15 +1,43 @@
+// Variables //
+// Colors 
+$dark-gray: #222;
+$black: #000;
+$blue: #0014ff;
+// Mixins
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $color;
+    -moz-box-shadow:inset $top $left $blur $color;
+    box-shadow:inset $top $left $blur $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $color;
+    -moz-box-shadow: $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+  }
+}
+
+body {
+  background: $dark-gray;
+  padding-top: 5.3rem;
+}
+
 .App {
   text-align: center;
   .App-header {
-    background-color: #282c34;
     min-height: 60px;
     display: flex;
+    background: $dark-gray;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
     padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    @include box-shadow(5px, 5px, 30px, rgba(0, 0, 0, 0.4))
+    z-index: 99;
     .App-logo {
       pointer-events: none;
       margin-bottom:0;
