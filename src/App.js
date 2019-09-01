@@ -9,6 +9,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import MoviesList from './components/MoviesList';
+import MovieDetail from './components/MovieDetail';
 
 const App = () => (
   <Router>
@@ -20,10 +21,10 @@ const App = () => (
       </header>
       <Switch>
         <Route exact path="/" component={MoviesList} />
+        <Route exact path="/:id" component={MovieDetail} />
       </Switch>
     </div>
   </Router>
 );
 
 export default App;
-

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Cards from './ui/Cards';
 
@@ -10,8 +11,10 @@ const Movie = ({ movie }) => (
         const Poster = item.images.find((poster) => poster.type === 'POSTER');
         return (
           <div key={item.id}>
-            <img src={Poster.url} alt=""/>
-            <h4>{item.title}</h4>
+            <Link to={`/${item.id}`}>
+              <img src={Poster.url} alt=""/>
+              <h4>{item.title}</h4>
+            </Link>
           </div>
         );
       })}
