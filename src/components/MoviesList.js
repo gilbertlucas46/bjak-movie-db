@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import Movie from './Movie';
+import LoadingSpinner from './ui/LoadingSpinner';
 
 export default class MoviesList extends Component {
   state = {
     movies: [],
+    loading: true,
   }
 
   async componentDidMount() {
@@ -12,6 +15,7 @@ export default class MoviesList extends Component {
       const movies = await res.json();
       this.setState({
         movies: movies.data,
+        loading: false,
       });
     } catch (e) {
       console.log(e);
@@ -19,12 +23,20 @@ export default class MoviesList extends Component {
   }
 
   render() {
-    const { movies } = this.state;
+    const { movies, loading } = this.state;
     const multiTitleManualCuration = movies.filter((movie) => movie.type === 'Multi-Title-Manual-Curation');
     return (
       <div>
-        {multiTitleManualCuration.map((movie) => <Movie key={movie.row_id} movie={movie}/>)}
+        {multiTitleManualCuration.map((movie) => (
+          <div key={movie.row_id}>
+            {loading ? <LoadingSpinner/> : <Movie movie={movie}/>}
+          </div >
+        ))}
       </div>
     );
   }
 }
+
+const MovieGrid =  styled.div`
+
+`;

@@ -2,15 +2,23 @@ import React, { Component } from 'react';
 
 export default class MovieDetail extends Component {
   state = {
-    movies: [],
+    movie: {},
+    metadata: {},
+    poster: '',
+    background: '',
   }
 
   async componentDidMount() {
     try {
-      const res = await fetch('https://cdn-discover.hooq.tv/v1.2/discover/feed?region=ID&page=1&perPage=20');
-      const movies = await res.json();
+      const res = await fetch(`https://cdn-discover.hooq.tv/v1.2/discover/titles/${this.props.match.params.id}`);
+      const movie = await res.json();
+      const poster = movie.data.images.map((items) => (items)).filter((img) => img.type === 'POSTER').map((a) => (a.url));
+      const background = movie.data.images.map((items) => (items)).filter((img) => img.type === 'BACKGROUND').map((a) => (a.url));
       this.setState({
-        movies: movies.data,
+        movie: movie.data,
+        metadata: movie.data.meta,
+        poster,
+        background,
       });
     } catch (e) {
       console.log(e);
@@ -18,11 +26,15 @@ export default class MovieDetail extends Component {
   }
 
   render() {
-    // const { movies } = this.state;
-    // const multiTitleManualCuration = movies.filter((movie) => movie.type === 'Multi-Title-Manual-Curation');
+    const { movie, metadata, poster, background } = this.state;
+
     return (
       <div>
-        <h1>Hello</h1>
+        <img src={background} alt={movie.title}/>
+        <img src={poster} alt={movie.title}/>
+        <h1>{movie.title}</h1>
+        <h3>Released date:{metadata.releaseYear}</h3>
+        <p>{movie.description}</p>
       </div>
     );
   }

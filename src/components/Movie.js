@@ -12,7 +12,7 @@ const Movie = ({ movie }) => (
         return (
           <div key={item.id}>
             <Link to={`/${item.id}`}>
-              <img src={Poster.url} alt=""/>
+              <img src={Poster.url} alt={item.title}/>
               <h4>{item.title}</h4>
             </Link>
           </div>
