@@ -28,9 +28,9 @@ export default class MoviesList extends Component {
     return (
       <>
         {multiTitleManualCuration.map((movie) => (
-          <MovieGrid>
-            <h1 key={movie.row_id}>{movie.row_name}</h1>  
-            <div key={movie.row_id}>
+          <MovieGrid key={movie.row_id}>
+            <h1>{movie.row_name}</h1>
+            <div>
               { loading ? <LoadingSpinner/> : <Movie movie={movie}/> }
             </div>
           </MovieGrid>
