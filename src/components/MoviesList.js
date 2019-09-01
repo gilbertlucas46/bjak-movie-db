@@ -28,8 +28,11 @@ export default class MoviesList extends Component {
     return (
       <>
         {multiTitleManualCuration.map((movie) => (
-          <MovieGrid key={movie.row_id}>
-            { loading ? <LoadingSpinner/> : <Movie movie={movie}/> }
+          <MovieGrid>
+            <h1 key={movie.row_id}>{movie.row_name}</h1>  
+            <div key={movie.row_id}>
+              { loading ? <LoadingSpinner/> : <Movie movie={movie}/> }
+            </div>
           </MovieGrid>
         ))}
       </>
@@ -38,8 +41,13 @@ export default class MoviesList extends Component {
 }
 
 const MovieGrid = styled.div`
-  /* display: grid;
-  padding: 1rem;
-  grid-template-columns: repeat(6, 1fr);
-  grid-row-gap: 1rem; */
+  padding-top: 2rem;
+  &:hover {
+    h1 {
+      color: white;
+    }
+  }
+  h1 {
+    color: #c3c5c8;
+  }
 `;

@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 
 const Movie = ({ movie }) => (
   <MoviesContainer>
-    <h1 key={movie.row_id}>{movie.row_name}</h1>
     {movie.data.map((item) => {
       const imgPoster = item.images.find((poster) => poster.type === 'POSTER');
       return (
@@ -29,7 +28,7 @@ Movie.propTypes = {
 };
 
 export const Poster = styled.img`
-  box-shadow: 0 0 35px black;
+  box-shadow: 0 0 30px #00000080;
 `;
 export const Cards = styled.div`
   display: inline-block;
@@ -52,12 +51,6 @@ export const Cards = styled.div`
 export const MoviesContainer = styled.div`
   white-space:nowrap;
   overflow: auto;
-  &:hover {
-    h1 {
-      color: white;
-    }
-  }
-  h1 {
-    color: #c3c5c8;
-  }
+  position: relative;
+  padding-top: 1.5rem;
 `;
