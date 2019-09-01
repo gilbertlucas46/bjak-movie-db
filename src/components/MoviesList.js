@@ -26,17 +26,20 @@ export default class MoviesList extends Component {
     const { movies, loading } = this.state;
     const multiTitleManualCuration = movies.filter((movie) => movie.type === 'Multi-Title-Manual-Curation');
     return (
-      <div>
+      <>
         {multiTitleManualCuration.map((movie) => (
-          <div key={movie.row_id}>
-            {loading ? <LoadingSpinner/> : <Movie movie={movie}/>}
-          </div >
+          <MovieGrid key={movie.row_id}>
+            { loading ? <LoadingSpinner/> : <Movie movie={movie}/> }
+          </MovieGrid>
         ))}
-      </div>
+      </>
     );
   }
 }
 
-const MovieGrid =  styled.div`
-
+const MovieGrid = styled.div`
+  /* display: grid;
+  padding: 1rem;
+  grid-template-columns: repeat(6, 1fr);
+  grid-row-gap: 1rem; */
 `;
