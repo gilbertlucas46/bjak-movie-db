@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import Overdrive from 'react-overdrive';
 import { Poster } from './Movie';
 
 export default class MovieDetail extends Component {
@@ -39,10 +40,13 @@ export default class MovieDetail extends Component {
 
       return spotlight;
     };
+    // console.log(movie)
     return (
       <MovieWrapper backdrop={getImgUrl}>
         <MovieInfo>
-          <Poster src={poster} alt={movie.title}/>
+          <Overdrive id={movie.id}>
+            <Poster src={poster} alt={movie.title}/>
+          </Overdrive>
           <div>
             <h1>{movie.title}</h1>
             <h3>Released date:{metadata.releaseYear}</h3>

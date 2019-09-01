@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-
+import Overdrive from 'react-overdrive';
 
 const Movie = ({ movie }) => (
   <MoviesContainer>
@@ -11,7 +11,9 @@ const Movie = ({ movie }) => (
       return (
         <Cards key={item.id}>
           <Link to={`/${item.id}`}>
-            <Poster src={imgPoster.url} alt={item.title}/>
+            <Overdrive id={item.id}>
+              <Poster src={imgPoster.url} alt={item.title}/>
+            </Overdrive>
             <h4>{item.title}</h4>
           </Link>
         </Cards>
@@ -23,13 +25,14 @@ export default Movie;
 
 Movie.propTypes = {
   movie: PropTypes.shape({
-    row_name: PropTypes.string.isRequired,
+    data: PropTypes.array.isRequired,
   }).isRequired,
 };
 
 export const Poster = styled.img`
   box-shadow: 0 0 30px #00000080;
   transition: all .2s ease-in-out;
+  min-width: 200px;
   &:hover {
     transform: scale(1.1);
   }
@@ -39,7 +42,7 @@ export const Cards = styled.div`
   display: inline-block;
   padding: 0 .6rem;
   @media (min-width:992px) {
-    max-width:250px;
+    max-width:200px;
     img {
       width:100%;
     }
