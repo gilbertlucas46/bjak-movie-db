@@ -6,7 +6,7 @@ import {
   Link,
 } from 'react-router-dom';
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
 import MoviesList from './components/MoviesList';
 import MovieDetail from './components/MovieDetail';
