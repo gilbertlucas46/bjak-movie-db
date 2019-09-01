@@ -32,6 +32,8 @@ module.exports = {
         "react/prop-types": 0,
         "jsx-a11y/anchor-is-valid": 0,
         "no-console": 0,
-        "react/state-in-constructor": 0
+        "react/state-in-constructor": 0,
+        "object-curly-newline": 0,
+        "react/jsx-one-expression-per-line": 0
     }
 };
