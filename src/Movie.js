@@ -8,7 +8,6 @@ const Movie = ({ movie }) => (
     <Cards>
       {movie.data.map((item) => {
         const Poster = item.images.find((poster) => poster.type === 'POSTER');
-        console.log(Poster);
         return (
           <div key={item.id}>
             <img src={Poster.url} alt=""/>

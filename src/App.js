@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 
@@ -27,12 +31,14 @@ export default class App extends Component {
     const multiTitleManualCuration = movies.filter((movie) => movie.type === 'Multi-Title-Manual-Curation');
     console.log(multiTitleManualCuration);
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
-        {multiTitleManualCuration.map((movie) => <Movie key={movie.row_id} movie={movie}/>)}
-      </div>
+      <Router>
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+          </header>
+          {multiTitleManualCuration.map((movie) => <Movie key={movie.row_id} movie={movie}/>)}
+        </div>
+      </Router>
     );
   }
 }
