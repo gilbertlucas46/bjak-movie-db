@@ -30,10 +30,11 @@ Movie.propTypes = {
 export const Poster = styled.img`
   box-shadow: 0 0 30px #00000080;
 `;
+
 export const Cards = styled.div`
   display: inline-block;
   padding: 0 .6rem;
-  @media (min-width:768px) {
+  @media (min-width:992px) {
     max-width:250px;
     img {
       width:100%;

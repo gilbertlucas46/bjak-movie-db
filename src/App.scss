@@ -3,18 +3,6 @@
 $dark-gray: #222;
 $black: #000;
 $blue: #0014ff;
-// Mixins
-@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
-  @if $inset {
-    -webkit-box-shadow:inset $top $left $blur $color;
-    -moz-box-shadow:inset $top $left $blur $color;
-    box-shadow:inset $top $left $blur $color;
-  } @else {
-    -webkit-box-shadow: $top $left $blur $color;
-    -moz-box-shadow: $top $left $blur $color;
-    box-shadow: $top $left $blur $color;
-  }
-}
 
 body {
   background: $dark-gray;
@@ -36,7 +24,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    @include box-shadow(5px, 5px, 30px, rgba(0, 0, 0, 0.4))
+    box-shadow: 5px, 5px, 30px, rgba(0, 0, 0, 0.4);
     z-index: 99;
     .App-logo {
       pointer-events: none;
