@@ -8,36 +8,55 @@ export default class MoviesList extends Component {
   state = {
     movies: [],
     loading: true,
-    pagination: [],
+    totalPages: null,
+    perPage: null,
+    page: 1,
   }
 
-  async componentDidMount() {
-    try {
-      const res = await fetch(`https://cdn-discover.hooq.tv/v1.2/discover/feed?region=ID&page=${this.state.currentPage}&perPage=20`);
-      const movies = await res.json();
-      this.setState({
-        movies: movies.data,
-        loading: false,
-        pagination: movies.pagination,
-      });
-    } catch (e) {
-      console.log(e);
-    }
+  componentDidMount() {
+    this.makeHttpRequestWithPage(1);
   }
+
+
+  makeHttpRequestWithPage = async (pageNumber) => {
+    const res = await fetch(`https://cdn-discover.hooq.tv/v1.2/discover/feed?region=ID&page=${pageNumber}&perPage=20`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const movies = await res.json();
+
+    this.setState({
+      movies: movies.data,
+      loading: false,
+      totalPages: movies.pagination.totalPages,
+      perPage: movies.pagination.perPage,
+      page: movies.pagination.page,
+    });
+  }
+
 
   render() {
-    const { movies, loading, pagination } = this.state;
+    const { movies, loading, totalPages, page } = this.state;
+    let renderPageNumbers;
     const multiTitleManualCuration = movies.filter((movie) => movie.type === 'Multi-Title-Manual-Curation');
 
     // Pagination
-    const currentPage = pagination.page;
-    const totalPages = [];
-
-    for (let i = 1; i <= pagination.totalPages; i++) {
-      totalPages.push(i);
+    const pageNumbers = [];
+    if (totalPages !== null) {
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+      renderPageNumbers = pageNumbers.map((number) => {
+        const classes = page === number ? 'active' : '';
+        return (
+          <span key={number} className={classes} onClick={() => this.makeHttpRequestWithPage(number)}><Buttons>{number}</Buttons></span>
+        );
+      });
     }
-
-
     return (
       <>
         {multiTitleManualCuration.map((movie) => (
@@ -49,19 +68,15 @@ export default class MoviesList extends Component {
           </MovieGrid>
         ))}
         <Pagination>
-          {totalPages.map((num) => (
-            <li className={currentPage === num ? 'active' : ''}>
-              <Buttons>{num}</Buttons>
-            </li>
-          ))}
+          {renderPageNumbers}
         </Pagination>
       </>
     );
   }
 }
 
-const Pagination = styled.ul`
-  li {
+const Pagination = styled.div`
+  span {
     display: inline-block;
     padding: 2px;
     margin: 4rem .4rem;
@@ -70,21 +85,14 @@ const Pagination = styled.ul`
     height:42px;
     text-align: center;
     line-height: 38px;
-    button {
-      color: gray;
-      text-decoration:none;
-      display:inline-block;
-      width: 100%;
-      &:hover {
-        cursor: pointer;
-      }
-    }
+    color: gray;
     &.active {
       background-color: black;
       transform: scale(1.1);
-      button {
+      Button {
         font-weight: bold;
-        color: white;
+        color:white;
+        width:100%;
       }
     }
   }
