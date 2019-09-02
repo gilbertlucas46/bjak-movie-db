@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Overdrive from 'react-overdrive';
 
+const MAX_LENGTH = 20;
+
 const Movie = ({ movie }) => (
   <MoviesContainer>
     {movie.data.map((item) => {
@@ -14,7 +16,7 @@ const Movie = ({ movie }) => (
             <Overdrive id={item.id}>
               <Poster src={imgPoster.url} alt={item.title}/>
             </Overdrive>
-            <h4>{item.title}</h4>
+            <h4>{`${item.title.substring(0, MAX_LENGTH)}`} {item.title.length > MAX_LENGTH && '...' }</h4>
           </Link>
         </Cards>
       );

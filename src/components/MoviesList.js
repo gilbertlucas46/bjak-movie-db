@@ -57,6 +57,7 @@ export default class MoviesList extends Component {
         );
       });
     }
+
     return (
       <>
         {multiTitleManualCuration.map((movie) => (

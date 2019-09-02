@@ -13,8 +13,9 @@ export default class MovieDetail extends Component {
   }
 
   async componentDidMount() {
+    const { match } = this.props;
     try {
-      const res = await fetch(`https://cdn-discover.hooq.tv/v1.2/discover/titles/${this.props.match.params.id}`);
+      const res = await fetch(`https://cdn-discover.hooq.tv/v1.2/discover/titles/${match.params.id}`);
       const movie = await res.json();
       const poster = movie.data.images.map((items) => (items)).filter((img) => img.type === 'POSTER').map((a) => (a.url));
       const background = movie.data.images.map((items) => (items)).filter((img) => img.type === 'BACKGROUND').map((a) => (a.url));
@@ -26,7 +27,6 @@ export default class MovieDetail extends Component {
         background,
         spotlight,
       });
-      console.log(this.props.match.params.id)
     } catch (e) {
       console.log(e);
     }
