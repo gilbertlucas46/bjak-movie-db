@@ -26,6 +26,7 @@ export default class MovieDetail extends Component {
         background,
         spotlight,
       });
+      console.log(this.props.match.params.id)
     } catch (e) {
       console.log(e);
     }
@@ -37,10 +38,9 @@ export default class MovieDetail extends Component {
       if (!(spotlight)) {
         return background;
       }
-
       return spotlight;
     };
-    // console.log(movie)
+
     return (
       <MovieWrapper backdrop={getImgUrl}>
         <MovieInfo>
@@ -50,6 +50,11 @@ export default class MovieDetail extends Component {
           <div>
             <h1>{movie.title}</h1>
             <h3>Released date:{metadata.releaseYear}</h3>
+            <hr></hr>
+            <p>
+              <strong>Languages: </strong>
+              {Array.of(movie.languages).reduce((id, lang) => id.concat(lang), '').split(',').join(', ')}
+            </p>
             <p>{movie.description}</p>
           </div>
         </MovieInfo>
@@ -74,6 +79,11 @@ const MovieInfo = styled.div`
   background: white;
   text-align: left;
   padding: 2rem 10%;
+  p {
+    span {
+      padding: 0 2px;
+    }
+  }
   img {
     &:hover {
       transform: unset;
